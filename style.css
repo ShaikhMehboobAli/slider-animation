@@ -1,0 +1,227 @@
+/*---- swatches ----*/
+/*---- functions ----*/
+/*---- mixins ----*/
+/*---- normalize ----*/
+
+body {
+  background-color: #252525;
+}
+
+.os-scrollbar-track {
+  left: 0;
+  right: 0;
+  width: 400px;
+  height: 4px;
+  max-width: 100%;
+  margin-left: auto;
+}
+.os-scrollbar-track::before {
+  position: absolute;
+  inset: 0;
+  height: 3px;
+  margin: auto;
+  background-color: white;
+  content: "";
+  /* border-radius: 3px; */
+}
+.os-scrollbar-track .os-scrollbar-handle {
+  background-color: #3f3e3e;
+  /* border-radius: 3px; */
+  cursor: -webkit-grab;
+  cursor: grab;
+  transition: background-color 0.3s;
+}
+.os-scrollbar-track .os-scrollbar-handle.active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+.os-scrollbar-track .os-scrollbar-handle:hover {
+  background-color: #3f3e3e;
+}
+
+.gallery-carousel {
+  --gallery-item-width: 300px;
+  --gallery-item-height: 250px;
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 0;
+}
+.gallery-carousel a,
+.gallery-carousel img {
+  display: block;
+}
+.gallery-carousel a {
+  position: relative;
+}
+.gallery-carousel img {
+  height: 100%;
+  /* opacity: .5; */
+  max-width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.gallery-carousel img:hover {
+  height: 100%;
+  max-width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+.gallery-carousel .gallery-photos {
+  height: calc(var(--gallery-item-height) * 2);
+  margin-bottom: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 0 1 auto;
+}
+.gallery-carousel .gallery-photo {
+  /* position: relative;
+  overflow: hidden; */
+  flex: 0 0 auto;
+}
+.gallery-carousel .gallery-photo.thumbs {
+  width: var(--gallery-item-width);
+  height: var(--gallery-item-height);
+  padding: 0 1px 0;
+}
+.gallery-carousel .gallery-photo.thumbs + .thumbs {
+  padding-top: 1px;
+  margin-left: calc(-1 * var(--gallery-item-width));
+  margin-top: var(--gallery-item-height);
+}
+.gallery-carousel .gallery-photo.featured {
+  animation: slide-out 1.5s forwards;
+  opacity: 0.5;
+  /* width: calc(var(--gallery-item-width)); */
+  height: calc(var(--gallery-item-height) * 2);
+}
+.gallery-carousel .gallery-photo.featured + .featured {
+  padding-left: 1px;
+}
+
+#wrapper {
+  width: 100%;
+}
+
+.gallery-photo.featured {
+  display: flex;
+  font-size: 18px;
+  color: black;
+}
+
+.first-div {
+  position: relative;
+  flex-direction: row;
+}
+
+.slide-in {
+  animation: slide-in 2.2s forwards;
+}
+
+.first-div:hover .second-div {
+  display: block;
+  color: #fff;
+  overflow-x: auto;
+}
+
+.container {
+  position: relative;
+}
+
+.first-div {
+  transition: transform 0.6s ease-in-out;
+}
+
+.hot {
+  visibility: hidden;
+}
+
+.hot span {
+  color: #ccc;
+}
+
+.gallery-carousel .gallery-photo.featured:hover {
+  animation: slide-in 1.5s forwards;
+  opacity: 1;
+  /* width: calc(var(--gallery-item-width) * 2.8); */
+  transform: scale(1.1);
+}
+
+.gallery-carousel .gallery-photo.featured:hover .hot {
+  visibility: visible;
+  background-color: #292929;
+  animation: text-in 2.5s forwards;
+  width: calc(var(--gallery-item-width) * 1.3);
+  height: calc(var(--gallery-item-height) * 2.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s ease-in-out;
+}
+
+.imm {
+  width: calc(var(--gallery-item-width) * 2);
+  height: calc(var(--gallery-item-height) * 2);
+}
+
+.gallery-carousel .gallery-photo.featured:hover .imm {
+  width: calc(var(--gallery-item-width) * 1.4);
+  /* animation: img-slide 2s forwards; */
+}
+
+@keyframes img-slide {
+  0% {
+    width: calc(var(--gallery-item-width) * 2.8);
+  }
+
+  100% {
+    width: calc(var(--gallery-item-width) * 1.4);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    width: calc(var(--gallery-item-width) * 1.6);
+  }
+
+  100% {
+    width: calc(var(--gallery-item-width) * 2.8);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    width: calc(var(--gallery-item-width) * 2.8);
+  }
+
+  100% {
+    width: calc(var(--gallery-item-width) * 2);
+  }
+}
+
+@keyframes text-in {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
