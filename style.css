@@ -184,7 +184,7 @@ body {
 
 
 .gallery-carousel-double {
-  --gallery-item-width: 250px;
+  --gallery-item-width: 163px;
   --gallery-item-height: 200px;
   position: relative;
   display: block;
