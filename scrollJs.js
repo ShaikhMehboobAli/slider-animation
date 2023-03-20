@@ -24,10 +24,17 @@ function imagesLoaded(images, fn) {
 
 // Scrollbar
 $(function () {
-  let opts = {
+  let optsSingle = {
     className: "os-custom",
     callbacks: {
-      onInitialized: initDrag,
+      onInitialized: initDragSingle,
+    },
+  };
+
+  let optsDouble = {
+    className: "os-custom",
+    callbacks: {
+      onInitialized: initDragDouble,
     },
   };
 
@@ -35,18 +42,74 @@ $(function () {
     var $this = $(this);
     console.log(el);
     imagesLoaded($this.find("img"), () => {
-      $this.data("os", OverlayScrollbars(el, opts));
+      $this.data("os", OverlayScrollbars(el, optsSingle));
+    });
+  });
+  $(".gallery-carousel-double").each(function (index, el) {
+    var $this = $(this);
+    console.log(el);
+    imagesLoaded($this.find("img"), () => {
+      $this.data("os", OverlayScrollbars(el, optsDouble));
     });
   });
 });
 
-initDrag = function () {
+initDragSingle = function () {
+  
   let $this = $(".gallery-carousel"),
     el = $this[0],
     isDown = false,
     mult = 3, // speed
     startX,
     scrollLeft;
+
+  // if ($(".gallery-carousel-double")) {
+  //   let $this = $(".gallery-carousel-double"),
+  //     el = $this[0],
+  //     isDown = false,
+  //     mult = 3, // speed
+  //     startX,
+  //     scrollLeft;
+  // }
+
+  $this
+    .on("mousedown", (e) => {
+      isDown = true;
+      startX = e.pageX - el.offsetLeft;
+      scrollLeft = $this.data("os").scroll().position.x;
+    })
+    .on("mouseleave mouseup", (e) => {
+      isDown = false;
+    })
+    .on("mousemove", (e) => {
+      if (isDown) {
+        e.preventDefault();
+
+        let x = e.pageX - el.offsetLeft,
+          walk = (x - startX) * -mult;
+
+        $this.data("os").scroll({ x: scrollLeft + walk + "px" }, 0);
+      }
+    });
+};
+
+initDragDouble = function () {
+  
+  let $this = $(".gallery-carousel-double"),
+    el = $this[0],
+    isDown = false,
+    mult = 3, // speed
+    startX,
+    scrollLeft;
+
+  // if ($(".gallery-carousel-double")) {
+  //   let $this = $(".gallery-carousel-double"),
+  //     el = $this[0],
+  //     isDown = false,
+  //     mult = 3, // speed
+  //     startX,
+  //     scrollLeft;
+  // }
 
   $this
     .on("mousedown", (e) => {
